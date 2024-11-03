@@ -1,0 +1,1 @@
+export const header_logo = "https://t4.ftcdn.net/jpg/04/47/30/89/360_F_447308950_lJQwQWrGJ5G4hSqQvv38oblZiW1m6G7J.jpg";
