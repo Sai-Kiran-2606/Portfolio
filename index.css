@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-minimalBackground;
+  @apply text-white;
+  @apply font-serif
+}
