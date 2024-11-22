@@ -3,8 +3,19 @@ import { education, projects, experiences } from "../utils/constants";
 import ProjectCard from "./ProjectCard";
 import EducationCard from "../components/EducationCard";
 import { header_logo } from "../utils/constants";
+import { useState } from "react";
+import emailjs from "emailjs-com";
 
 const Body = () => {
+  const [fName, setFName] = useState("");
+  const [lName, setLName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [body, setBody] = useState("");
+
+  const gmailComposeURL =
+    "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=saikiranreddykotha260@gmail.com";
+
   const scrollToAbout = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({
       behavior: "smooth",
@@ -35,8 +46,67 @@ const Body = () => {
     });
   };
 
+  const handleFName = (e) => {
+    setFName(e.target.value);
+  };
+
+  const handleLName = (e) => {
+    setLName(e.target.value);
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePhone = (e) => {
+    setPhone(e.target.value);
+  };
+
+  const handleBody = (e) => {
+    setBody(e.target.value);
+  };
+
+  const handleClearAll = () => {
+    setFName("");
+    setLName("");
+    setEmail("");
+    setPhone("");
+    setBody("");
+  };
+
+  const handleSubmitAll = (e) => {
+    e.preventDefault();
+
+    // EmailJS parameters
+    const templateParams = {
+      firstName: fName,
+      lastName: lName,
+      email: email,
+      phone: phone,
+      message: body,
+    };
+
+    emailjs
+      .send(
+        "service_r7uuevi", // Replace with your EmailJS service ID
+        "template_3iv3dge", // Replace with your EmailJS template ID
+        templateParams,
+        "PgZFV2XciVuFXVWHI" // Replace with your EmailJS user ID
+      )
+      .then(
+        (response) => {
+          console.log("Success...", response);
+        },
+        (error) => {
+          console.log("FAILED...", error);
+        }
+      );
+    handleClearAll();
+  };
+
   return (
     <div className="Body">
+      {/* Header */}
       <div
         id="header"
         className="fixed z-10 bg-minimalBackground text-white font-serif w-full h-24">
@@ -81,7 +151,7 @@ const Body = () => {
       {/* About */}
       <div
         id="about"
-        className="flex flex-col md:flex-row items-center justify-center pt-24 pb-10 md:pt-14 md:pb-6">
+        className="flex flex-col md:flex-row items-center justify-center pt-24 mb-6 md:pt-20">
         <img
           className="md:ml-16 h-96 p-3 object-cover rounded-full"
           src={photo}></img>
@@ -108,65 +178,91 @@ const Body = () => {
           <ul className="flex my-5">
             {/* <li className="text-2xl">Checkout➡️ </li> */}
             <li>
-              <img
-                className="w-12 mr-4 rounded-lg hover:cursor-pointer transform transition-transform duration-300 hover:scale-110"
-                src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"></img>
+              <a
+                href="https://www.linkedin.com/in/saikiranreddykotha"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img
+                  className="w-12 mr-4 rounded-lg hover:cursor-pointer transform transition-transform duration-300 hover:scale-110"
+                  src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"></img>
+              </a>
             </li>
             <li>
-              <img
-                className="w-20 mx-4 rounded-lg hover:cursor-pointer transform transition-transform duration-300 hover:scale-110"
-                src="https://media.licdn.com/dms/image/D5612AQHXyBgH7mnUqg/article-cover_image-shrink_720_1280/0/1691804305878?e=2147483647&v=beta&t=Sy3bXZgFG3usM3i761wUl18W3I-vdBtWtBOGDMnTuCk"></img>
+              <a
+                href="https://github.com/Sai-Kiran-2606?tab=repositories"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img
+                  className="w-20 mx-4 rounded-lg hover:cursor-pointer transform transition-transform duration-300 hover:scale-110"
+                  src="https://media.licdn.com/dms/image/D5612AQHXyBgH7mnUqg/article-cover_image-shrink_720_1280/0/1691804305878?e=2147483647&v=beta&t=Sy3bXZgFG3usM3i761wUl18W3I-vdBtWtBOGDMnTuCk"></img>
+              </a>
             </li>
             <li>
-              <img
-                className="w-12 mx-4 hover:cursor-pointer transform transition-transform duration-300 hover:scale-110"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png"></img>
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img
+                  className="w-12 mx-4 hover:cursor-pointer transform transition-transform duration-300 hover:scale-110"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png"></img>
+              </a>
             </li>
             <li>
-              <img
-                className="w-12 mx-4 rounded-lg hover:cursor-pointer transform transition-transform duration-300 hover:scale-110"
-                src="https://cdn-icons-png.freepik.com/256/4008/4008218.png?semt=ais_hybrid"></img>
+              <a
+                href="https://x.com/ReddyKiran72304"
+                target="_blank"
+                rel="noopener noreferrer">
+                <img
+                  className="w-12 mx-4 rounded-lg hover:cursor-pointer transform transition-transform duration-300 hover:scale-110"
+                  src="https://cdn-icons-png.freepik.com/256/4008/4008218.png?semt=ais_hybrid"></img>
+              </a>
             </li>
           </ul>
           <div className="mt-8 flex flex-row">
-            <button className="hover:cursor-pointer px-2 mr-3 py-2 my-2 lg:px-8 lg:mr-3 lg:py-2 text-xl bg-white text-black rounded-3xl transform transition-transform duration-300 hover:scale-105">
-              Resume
-            </button>
-            <button className="hover:cursor-pointer px-2 py-2 my-2 lg:px-8 lg:ml-3 lg:py-2 text-xl bg-white text-black rounded-3xl transform transition-transform duration-300 hover:scale-105">
-              saikiranreddykotha260@gmail.com
-            </button>
+            <a
+              href="../../public/RESUME.pdf"
+              download="SaiKiran_Reddy_Kotha_Resume.pdf">
+              <button className="hover:cursor-pointer px-2 mr-3 py-2 my-2 lg:px-8 lg:mr-3 lg:py-2 text-xl bg-white text-black rounded-3xl transform transition-transform duration-300 hover:scale-105">
+                Resume
+              </button>
+            </a>
+            <a href={gmailComposeURL} target="_blank" rel="noopener noreferrer">
+              <button className="hover:cursor-pointer px-2 py-2 my-2 lg:px-8 lg:ml-3 lg:py-2 text-xl bg-white text-black rounded-3xl transform transition-transform duration-300 hover:scale-105">
+                saikiranreddykotha260@gmail.com
+              </button>
+            </a>
           </div>
         </div>
       </div>
 
       {/* Education */}
-      <h1
-        id="education"
-        className="text-5xl text-center font-bold text-cyan-100">
-        Education
-      </h1>
-      <div className="flex flex-col py-5 w-10/12 mx-auto bg-minimalBackground text-white font-serif">
-        {education.map((edu) => (
-          <EducationCard key={edu.college} data={edu} />
-        ))}
+      <div id="education" className="pt-24">
+        <h1 className="text-5xl text-center font-bold text-cyan-100">
+          Education
+        </h1>
+        <div className="flex flex-col py-5 w-10/12 mx-auto bg-minimalBackground text-white font-serif">
+          {education.map((edu) => (
+            <EducationCard key={edu.college} data={edu} />
+          ))}
+        </div>
       </div>
 
       {/* Projects */}
-      <h1 id="projects" className="text-5xl font-bold text-center pb-8">
-        Projects
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-10/12 ml-14 md:ml-28">
-        {projects.map((project) => (
-          <ProjectCard key={project.title} data={project} />
-        ))}
+      <div id="projects" className="pt-24 pb-10">
+        <h1 className="text-5xl font-bold text-center mb-8">Projects</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-10/12 mx-auto">
+          {projects.map((project) => (
+            <ProjectCard key={project.title} data={project} />
+          ))}
+        </div>
       </div>
 
       {/* Experience */}
-      <div id="experience" className="bg-minimalBackground pt-20 pb-10 px-5">
+      <div id="experience" className="bg-minimalBackground pt-24 pb-12 px-5">
         <h2 className="text-5xl font-bold text-center mb-8 text-blue-600">
           Experience
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-10/12 ml-14 md:ml-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-10/12 mx-auto">
           {experiences.map((exp, index) => (
             <div
               key={index}
@@ -187,52 +283,71 @@ const Body = () => {
         <h1 className="text-center text-5xl font-bold py-4 text-white">
           Contact
         </h1>
-        <div className="w-6/12 mx-auto bg-white text-black rounded-lg py-2">
-          <div className="flex flex-col lg:flex-row justify-between my-2">
-            <div className="ml-10 mr-10">
-              <label className="py-2 text-2xl font-bold">First Name</label>
+        <div className="w-8/12 mx-auto bg-white text-black rounded-lg py-2">
+          <div className="flex flex-col lg:flex-row justify-between my-2 gap-x-4">
+            <div className="w-full lg:w-1/2 px-4">
+              <label className="py-2 text-2xl font-bold block">
+                First Name
+              </label>
               <input
                 type="text"
-                className="border-2 border-black border-solid rounded-lg h-10 mb-3 px-1 w-full"></input>
+                className="border-2 border-black border-solid rounded-lg h-10 mb-3 px-2 w-full text-lg"
+                placeholder="Enter your first name"
+                value={fName}
+                onChange={handleFName}
+              />
             </div>
-            <div className="ml-10 mr-10">
-              <label className="py-2 text-2xl font-bold">Last Name</label>
+            <div className="w-full lg:w-1/2 px-4">
+              <label className="py-2 text-2xl font-bold block">Last Name</label>
               <input
                 type="text"
-                className="border-2 border-black border-solid rounded-lg h-10 mb-3 px-1 w-full"></input>
+                className="border-2 border-black border-solid rounded-lg h-10 mb-3 px-2 w-full text-lg"
+                placeholder="Enter your last name"
+                value={lName}
+                onChange={handleLName}
+              />
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row justify-between my-2">
-            <div className="ml-10 mr-10">
-              <label className="py-2 mr-14 text-2xl font-bold">Email</label>
+          <div className="flex flex-col lg:flex-row justify-between my-2 gap-x-4">
+            <div className="w-full lg:w-1/2 px-4">
+              <label className="py-2 text-2xl font-bold block">Email</label>
               <input
                 type="text"
-                className="border-2 border-black border-solid rounded-lg h-10 mb-3 px-1 w-full"></input>
+                className="border-2 border-black border-solid rounded-lg h-10 mb-3 px-2 w-full text-lg"
+                placeholder="username@example.com"
+                value={email}
+                onChange={handleEmail}
+              />
             </div>
-            <div className="ml-10 mr-10">
-              <label className="py-2 ml-12 text-2xl font-bold">Phone</label>
+            <div className="w-full lg:w-1/2 px-4">
+              <label className="py-2 text-2xl font-bold block">Phone</label>
               <input
                 type="text"
-                className="border-2 border-black border-solid rounded-lg h-10 mb-3 px-1 w-full"></input>
+                className="border-2 border-black border-solid rounded-lg h-10 mb-3 px-2 w-full text-lg"
+                placeholder="(XXX)-(XXX)-XXXX"
+                value={phone}
+                onChange={handlePhone}
+              />
             </div>
           </div>
-          <div className="ml-10 mr-10">
-            <label className="py-2 text-2xl font-bold">Body</label>
-            <input
-              type="text"
-              className="border-2 border-black border-solid rounded-lg h-28 mb-3 px-1 text-lg w-full"></input>
+          <div className="px-4">
+            <label className="py-2 text-2xl font-bold block">Body</label>
+            <textarea
+              className="border-2 border-black border-solid rounded-lg h-28 mb-3 px-2 text-lg w-full"
+              value={body}
+              onChange={handleBody}></textarea>
           </div>
-          <div className="flex flex-col xl:flex-row justify-between">
-            <div className="ml-10 mr-10">
-              <button className="bg-red-500 text-white text-xl p-2 my-4 rounded-lg">
-                Clear All
-              </button>
-            </div>
-            <div className="ml-10 mr-10">
-              <button className="bg-green-500 text-white text-xl p-2 my-4 rounded-lg">
-                Submit
-              </button>
-            </div>
+          <div className="flex flex-col xl:flex-row justify-between px-4 my-4 gap-4">
+            <button
+              className="bg-red-500 text-white text-xl p-2 rounded-lg w-full xl:w-1/2"
+              onClick={handleClearAll}>
+              Clear All
+            </button>
+            <button
+              className="bg-green-500 text-white text-xl p-2 rounded-lg w-full xl:w-1/2"
+              onClick={handleSubmitAll}>
+              Submit
+            </button>
           </div>
         </div>
       </div>

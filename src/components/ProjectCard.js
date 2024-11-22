@@ -3,7 +3,7 @@ const ProjectCard = (props) => {
   const project = props.data;
   return (
     <div>
-      <div className="justify-between h-full bg-white text-black pt-4 px-4 rounded-xl transform transition-transform duration-300 hover:scale-105">
+      <div className="p-6 justify-between h-full bg-white text-black rounded-xl transform transition-transform duration-300 hover:scale-105">
         <div>
           <h1 className="text-3xl">{project.title}</h1>
           <p className="italic text-lg mt-1">{project.techStack}</p>
