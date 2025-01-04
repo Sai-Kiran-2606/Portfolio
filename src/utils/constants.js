@@ -1,20 +1,25 @@
 export const header_logo = "https://t3.ftcdn.net/jpg/04/79/09/30/360_F_479093009_Dw2gNNPQeTo1adNaxNdQrGeSQhqRevaf.jpg";
 
+export const hamburger_logo = "https://img.icons8.com/?size=100&id=MmupZtPbnw66&format=png&color=000000";
+
 export const projects = [
     {
         title: "TODO Management Application",
         techStack: "Java | Spring Boot | React | MySQL | AWS | Docker",
-        description: "Built an application to manage ToDo's of multiple users."
+        description: "Built an application to manage ToDo's of multiple users.",
+        link: "https://github.com/Sai-Kiran-2606/Todo-Management-Application"
     },
     {
         title: "REST API for Social Media Application",
         techStack: "Java | Spring Boot | AWS | Docker",
-        description: "Built REST API for CRUD operations for a social media application for mutliple users."
+        description: "Built REST API for CRUD operations for a social media application for mutliple users.",
+        link: "https://github.com/Sai-Kiran-2606/REST-API-For-Social-Media"
     },
     {
         title: "Pothole Detection Using CNN",
         techStack: "Python | OpenCV | CNN | NumPy | TensorFlow",
-        description: "Built an application to manage ToDo's of multiple users."
+        description: "Built an application to manage ToDo's of multiple users.",
+        link: "https://github.com/Sai-Kiran-2606/Pothole-Detection-Using-CNN"
     }
 ];
 

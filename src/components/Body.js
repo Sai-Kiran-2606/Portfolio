@@ -5,6 +5,7 @@ import EducationCard from "../components/EducationCard";
 import { header_logo } from "../utils/constants";
 import { useState } from "react";
 import emailjs from "emailjs-com";
+import { hamburger_logo } from "../utils/constants";
 
 const Body = () => {
   const [fName, setFName] = useState("");
@@ -12,6 +13,7 @@ const Body = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [body, setBody] = useState("");
+  const [hamburger, setHamburger] = useState(false);
 
   const gmailComposeURL =
     "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=saikiranreddykotha260@gmail.com";
@@ -44,6 +46,10 @@ const Body = () => {
     document.getElementById(sectionId)?.scrollIntoView({
       behavior: "smooth",
     });
+  };
+
+  const handleHamburger = () => {
+    setHamburger(!hamburger);
   };
 
   const handleFName = (e) => {
@@ -110,12 +116,12 @@ const Body = () => {
       <div
         id="header"
         className="fixed z-10 bg-minimalBackground text-white font-serif w-full h-24">
-        <div className="flex justify-between shadow-lg mx-4">
+        <div className="flex justify-between shadow-lg mx-2">
           <img
-            className="my-4 mx-4 w-16 rounded-3xl hover:cursor-pointer transform transition-transform duration-300 hover:scale-105"
-            src={header_logo}
+            className="m-4 w-16 rounded-3xl hover:cursor-pointer transform transition-transform duration-300 hover:scale-105"
+            src={header_logo} onClick={() => scrollToAbout("about")}
           />
-          <ul className="flex my-3 mx-4 p-4 text-2xl">
+          <ul className="relative flex my-3 mx-4 text-2xl">
             <button
               className="mx-4 md:inline-block hidden transform transition-transform duration-300 hover:scale-105"
               onClick={() => scrollToAbout("about")}>
@@ -141,9 +147,19 @@ const Body = () => {
               onClick={() => scrollToContact("contact")}>
               Contact
             </button>
-            <button className="mx-4 inline-block md:hidden transform transition-transform duration-300 hover:scale-105">
-              Menu
-            </button>
+            {hamburger && <div className="bg-white w-40 h-48 z-50 rounded-md absolute top-20 -left-full md:hidden">
+                <ul className=" text-black text-lg items-center justify-center p-2">
+                  <button className="my-2 block">About</button>
+                  <button className="my-2 block">Education</button>
+                  <button className="my-2 block">Projects</button>
+                  <button className="my-2 block">Experience</button>
+                  <button className="my-2 block">Contact</button>
+                </ul>
+              </div>}
+            <img
+              className="m-4 w-10 rounded-3xl hover:cursor-pointer inline-block md:hidden transform transition-transform duration-300 hover:scale-105"
+              src={hamburger_logo}
+              onClick={handleHamburger}></img>
           </ul>
         </div>
       </div>
@@ -151,7 +167,7 @@ const Body = () => {
       {/* About */}
       <div
         id="about"
-        className="flex flex-col md:flex-row items-center justify-center pt-24 mb-6 md:pt-20">
+        className="flex flex-col md:flex-row items-center justify-center pt-24 mb-6 mx-auto md:pt-12">
         <img
           className="md:ml-16 h-96 p-3 object-cover rounded-full"
           src={photo}></img>
@@ -219,16 +235,14 @@ const Body = () => {
             </li>
           </ul>
           <div className="mt-8 flex flex-row">
-            <a
-              href="../../public/RESUME.pdf"
-              download="SaiKiran_Reddy_Kotha_Resume.pdf">
+            <a href="../assets/RESUME.pdf" download="RESUME.pdf">
               <button className="hover:cursor-pointer px-2 mr-3 py-2 my-2 lg:px-8 lg:mr-3 lg:py-2 text-xl bg-white text-black rounded-3xl transform transition-transform duration-300 hover:scale-105">
                 Resume
               </button>
             </a>
             <a href={gmailComposeURL} target="_blank" rel="noopener noreferrer">
               <button className="hover:cursor-pointer px-2 py-2 my-2 lg:px-8 lg:ml-3 lg:py-2 text-xl bg-white text-black rounded-3xl transform transition-transform duration-300 hover:scale-105">
-                saikiranreddykotha260@gmail.com
+                Contact Me
               </button>
             </a>
           </div>
@@ -279,7 +293,7 @@ const Body = () => {
       </div>
 
       {/* Contact */}
-      <div id="contact" className="bg-minimalBackground text-white pb-24">
+      <div id="contact" className="bg-minimalBackground text-white pb-16">
         <h1 className="text-center text-5xl font-bold py-4 text-white">
           Contact
         </h1>
